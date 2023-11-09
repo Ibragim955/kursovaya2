@@ -1,5 +1,6 @@
 package skypro.test.project.service.implemention;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import skypro.test.project.service.ExaminerService;
 import skypro.test.project.NotEnoughQuestionExeption;
@@ -15,9 +16,11 @@ public class ExaminerServiceImpl implements ExaminerService {
     private Random random;
 
 
-    public ExaminerServiceImpl() {
+    @Autowired
+    public ExaminerServiceImpl(List<QuestionService> questionServices) {
         this.random = new Random();
         this.iterator = 0;
+        this.questionServices = questionServices;
     }
     @Override
     public Collection<Question> getQuestions(int amount){
